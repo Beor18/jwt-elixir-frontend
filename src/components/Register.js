@@ -33,7 +33,7 @@ class Register extends Component {
     render() {
         return(
             <div className="container" style={{ marginTop: '50px', width: '700px'}}>
-            <h2 style={{marginBottom: '40px'}}>Registration</h2>
+            <h2 style={{marginBottom: '40px'}}>Registrarse</h2>
             <form onSubmit={ this.handleSubmit }>
                
                 <div className="form-group">
