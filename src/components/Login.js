@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { loginUser } from '../actions/authentication';
 import classnames from 'classnames';
 
@@ -36,7 +36,7 @@ class Login extends Component {
     componentWillReceiveProps(nextProps) {
             if(nextProps.errors) {
                 this.setState({
-                errors: nextProps.errors
+                    errors: nextProps.errors
              });
         }
     }

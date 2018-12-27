@@ -96,7 +96,7 @@ class Register extends Component {
     }
 }
 
-Register.protoType = {
+Register.propTypes = {
     registerUser: PropTypes.func.isRequired,
 };
 
