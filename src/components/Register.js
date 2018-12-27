@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../actions/authentication';
+import classnames from 'classnames';
 
 
 class Register extends Component {
+
     constructor() {
         super();
         this.state = {
@@ -44,6 +46,7 @@ class Register extends Component {
     }
 
     render() {
+        const { errors } = this.state;
         return(
             <div className="container" style={{ marginTop: '50px', width: '700px'}}>
             <h2 style={{marginBottom: '40px'}}>Registrarse</h2>
@@ -53,31 +56,34 @@ class Register extends Component {
                     <input
                     type="email"
                     placeholder="Email"
-                    className="form-control"
+                    className={classnames('form-control form-control-lg', { 'is-invalid': errors.email})}
                     name="email"
                     onChange={ this.handleInputChange }
                     value={ this.state.email }
                     />
+                    {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
                 </div>
                 <div className="form-group">
                     <input
                     type="password"
                     placeholder="Password"
-                    className="form-control"
+                    className={classnames('form-control form-control-lg', { 'is-invalid': errors.password})}
                     name="password"
                     onChange={ this.handleInputChange }
                     value={ this.state.password }
                     />
+                    {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
                 </div>
                 <div className="form-group">
                     <input
                     type="password"
                     placeholder="Confirm Password"
-                    className="form-control"
+                    className={classnames('form-control form-control-lg', { 'is-invalid': errors.password_confirmation})}
                     name="password_confirm"
                     onChange={ this.handleInputChange }
                     value={ this.state.password_confirmation }
                     />
+                    {errors.password_confirmation && (<div className="invalid-feedback">{errors.password_confirmation}</div>)}
                 </div>
                 <div className="form-group">
                     <button type="submit" className="btn btn-primary">
@@ -90,7 +96,7 @@ class Register extends Component {
     }
 }
 
-Register.prototype = {
+Register.protoType = {
     registerUser: PropTypes.func.isRequired,
 };
 
