@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 export default class Home extends Component {
     render() {
         return(
-            <div>
-                Home Componente
+            <div className="container" style={{ marginTop: '20px'}}>
+                <h2>Bienvenido a Home componente</h2>
             </div>
         );
     }

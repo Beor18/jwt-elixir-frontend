@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { loginUser } from '../actions/authentication';
 import classnames from 'classnames';
 
 class Login extends Component {
+
     constructor() {
         super();
         this.state = {
@@ -12,14 +13,13 @@ class Login extends Component {
             password: '',
             errors: {}
         }
-
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleInputChange(e) {
         this.setState({
-            [e.target.email]: e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
@@ -29,23 +29,31 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password,
         }
-
         this.props.loginUser(user);
     }
 
+    componentDidMount() {
+        if(this.props.auth.isAuthenticated) {
+            this.props.history.push('/');
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
-            if(nextProps.errors) {
-                this.setState({
-                    errors: nextProps.errors
-             });
+        if(nextProps.auth.isAuthenticated) {
+            this.props.history.push('/')
+        }
+        if(nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
         }
     }
 
     render() {
         const {errors} = this.state;
         return(
-            <div className="container" style={{ marginTop: '50px', width: '700px'}}>
-            <h2 style={{marginBottom: '40px'}}>Login</h2>
+        <div className="container" style={{ marginTop: '50px', width: '700px'}}>
+            <h2 style={{marginBottom: '40px'}}>Panel de Administración</h2>
             <form onSubmit={ this.handleSubmit }>
                 <div className="form-group">
                     <input
@@ -63,7 +71,7 @@ class Login extends Component {
                 <div className="form-group">
                     <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Contraseña"
                     className={classnames('form-control form-control-lg', {
                         'is-invalid': errors.password
                     })} 
@@ -74,7 +82,7 @@ class Login extends Component {
                     {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-danger" style={{  width: '100%'}}>
                         Ingresar
                     </button>
                 </div>
@@ -85,11 +93,14 @@ class Login extends Component {
 }
 
 Login.propTypes = {
+    loginUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
+    auth: state.auth,
     errors: state.errors
 })
 
-export  default connect(mapStateToProps, { loginUser })(Login)
+export default connect(mapStateToProps, { loginUser })(Login)

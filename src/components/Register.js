@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { registerUser } from '../actions/authentication';
 import classnames from 'classnames';
 
-
 class Register extends Component {
 
     constructor() {
@@ -16,14 +15,13 @@ class Register extends Component {
             password_confirmation: '',
             errors: {}
         }
-
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleInputChange(e) {
         this.setState({
-            [e.target.email]: e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
@@ -32,12 +30,15 @@ class Register extends Component {
         const user = {
             email: this.state.email,
             password: this.state.password,
-            password_confirmation: this.state.password_confirmation
+            password_confirm: this.state.password_confirmation
         }
         this.props.registerUser(user, this.props.history);
     }
 
     componentWillReceiveProps(nextProps) {
+        if(nextProps.auth.isAuthenticated) {
+            this.props.history.push('/')
+        }
         if(nextProps.errors) {
             this.setState({
                 errors: nextProps.errors
@@ -45,18 +46,25 @@ class Register extends Component {
         }
     }
 
+    componentDidMount() {
+        if(this.props.auth.isAuthenticated) {
+            this.props.history.push('/');
+        }
+    }
+
     render() {
         const { errors } = this.state;
         return(
-            <div className="container" style={{ marginTop: '50px', width: '700px'}}>
+        <div className="container" style={{ marginTop: '50px', width: '700px'}}>
             <h2 style={{marginBottom: '40px'}}>Registrarse</h2>
             <form onSubmit={ this.handleSubmit }>
-               
                 <div className="form-group">
                     <input
                     type="email"
                     placeholder="Email"
-                    className={classnames('form-control form-control-lg', { 'is-invalid': errors.email})}
+                    className={classnames('form-control form-control-lg', {
+                        'is-invalid': errors.email
+                    })}
                     name="email"
                     onChange={ this.handleInputChange }
                     value={ this.state.email }
@@ -66,8 +74,10 @@ class Register extends Component {
                 <div className="form-group">
                     <input
                     type="password"
-                    placeholder="Password"
-                    className={classnames('form-control form-control-lg', { 'is-invalid': errors.password})}
+                    placeholder="Contraseña"
+                    className={classnames('form-control form-control-lg', {
+                        'is-invalid': errors.password
+                    })}
                     name="password"
                     onChange={ this.handleInputChange }
                     value={ this.state.password }
@@ -77,17 +87,19 @@ class Register extends Component {
                 <div className="form-group">
                     <input
                     type="password"
-                    placeholder="Confirm Password"
-                    className={classnames('form-control form-control-lg', { 'is-invalid': errors.password_confirmation})}
-                    name="password_confirm"
+                    placeholder="Confirmar Contraseña"
+                    className={classnames('form-control form-control-lg', {
+                        'is-invalid': errors.password_confirmation
+                    })}
+                    name="password_confirmation"
                     onChange={ this.handleInputChange }
                     value={ this.state.password_confirmation }
                     />
                     {errors.password_confirmation && (<div className="invalid-feedback">{errors.password_confirmation}</div>)}
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-primary">
-                        Registrar Usuario
+                    <button type="submit" className="btn btn-danger" style={{  width: '100%'}}>
+                        Registrarse
                     </button>
                 </div>
             </form>
@@ -98,10 +110,12 @@ class Register extends Component {
 
 Register.propTypes = {
     registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
+    auth: state.auth,
     errors: state.errors
-})
+});
 
 export default connect(mapStateToProps,{ registerUser })(withRouter(Register))

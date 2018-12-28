@@ -17,8 +17,8 @@ export const registerUser = (user, history) => dispatch => {
 export const loginUser = (user) => dispatch => {
     axios.post('http://localhost:4000/api/v1/sign_in', user)
             .then(res => {
-                const { token } = res.data;
-                localStorage.setItem('jwtToken', token);
+                const token = res.data.jwt;
+                localStorage.setItem('jwt', token);
                 setAuthToken(token);
                 const decoded = jwt_decode(token);
                 dispatch(setCurrentUser(decoded));
@@ -36,4 +36,11 @@ export const setCurrentUser = decoded => {
         type: SET_CURRENT_USER,
         payload: decoded
     }
+}
+
+export const logoutUser = (history) => dispatch => {
+    localStorage.removeItem('jwt');
+    setAuthToken(false);
+    dispatch(setCurrentUser({}));
+    history.push('/login');
 }
