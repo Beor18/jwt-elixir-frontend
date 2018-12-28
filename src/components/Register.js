@@ -28,9 +28,11 @@ class Register extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const user = {
-            email: this.state.email,
-            password: this.state.password,
-            password_confirmation: this.state.password_confirmation
+            user: {
+                email: this.state.email,
+                password: this.state.password,
+                password_confirmation: this.state.password_confirmation
+             }
         }
         this.props.registerUser(user, this.props.history);
     }
