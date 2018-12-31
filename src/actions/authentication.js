@@ -44,7 +44,3 @@ export const logoutUser = (history) => dispatch => {
     dispatch(setCurrentUser({}));
     history.push('/login');
 }
-
-export const getHoteles = (history) => dispatch => {
-
-}
