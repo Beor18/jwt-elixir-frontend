@@ -19,7 +19,7 @@ class Home extends Component {
     componentDidMount(){
         axios({
             method: 'GET',
-            url: 'http://localhost:4000/api/v1/my_user',
+            url: 'http://localhost:4000/api/v1/hoteles',
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ class Home extends Component {
             },
         }).then((response) => {
           this.setState({
-            email: response.data.email
+            name: response.data.data
           });
         }).catch((error) => {
           this.setState({
@@ -38,9 +38,11 @@ class Home extends Component {
 
     render() {
         const {isAuthenticated} = this.props.auth;
-        const { email } = this.state;
+        const { name } = this.state;
         const authLinks = (
-            <h2>Bienvenido de nuevo {email}</h2>
+            Object.keys(name).map(key => (
+                <li key={key}>{name[key].name} </li>
+             ))
         )
       const guestLinks = (
         <h2>Bienvenido a Home componente usted no esta logeado</h2>
@@ -49,6 +51,7 @@ class Home extends Component {
             <div className="container" style={{ marginTop: '20px'}}>
                {isAuthenticated ? authLinks : guestLinks}
             </div>
+            
         );
     }
 }
