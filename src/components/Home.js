@@ -40,8 +40,13 @@ class Home extends Component {
         const {isAuthenticated} = this.props.auth;
         const { name } = this.state;
         const authLinks = (
-            Object.keys(name).map(key => (
-                <li key={key}>{name[key].name} </li>
+            Object.keys(name).map(key => ( 
+                <div key={key} className="card" style={{width: '18rem', float: 'left', marginRight: '20px', marginTop: '15px'}}>
+                    <div className="card-body">
+                    <h5 className="card-title">{name[key].name}</h5>
+                    <p className="card-text">$ {name[key].price} </p>
+                    </div>
+                </div>
              ))
         )
       const guestLinks = (

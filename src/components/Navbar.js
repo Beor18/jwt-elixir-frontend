@@ -16,10 +16,12 @@ class Navbar extends Component {
         const {isAuthenticated, user} = this.props.auth;
         const authLinks = (
             <ul className="navbar-nav ml-auto">
-                <a href="#" className="nav-link" onClick={this.onLogout.bind(this)}>
-                   
-                            Salir
-                </a>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/perfil">Perfil</Link>
+                </li>
+                <li className="nav-item">
+                    <a href="#" className="nav-link" onClick={this.onLogout.bind(this)}>Salir</a>
+                </li>
             </ul>
         )
       const guestLinks = (
