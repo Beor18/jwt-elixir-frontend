@@ -14,6 +14,6 @@ Utilizando el backend [`Jwt, autenticación y crud API Rest con Elixir 1.7.3 y P
 
 ![Imgur](https://i.imgur.com/NpOUUbq.png)
 
-### Demo Home
+### Demo Home con usuario logeado
 
-![Imgur](https://i.imgur.com/v8WLt9R.png)
+![Imgur](https://i.imgur.com/1Szjzgf.png)
