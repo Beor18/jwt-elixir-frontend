@@ -3,8 +3,11 @@ import { GET_ERRORS, SET_CURRENT_USER } from './types';
 import setAuthToken from '../setAuthToken';
 import jwt_decode from 'jwt-decode';
 
+const URL_REGISTRO = 'http://localhost:4000/api/v1/sign_up';
+const URL_LOGIN = 'http://localhost:4000/api/v1/sign_in';
+
 export const registerUser = (user, history) => dispatch => {
-    axios.post('http://localhost:4000/api/v1/sign_up', user)
+    axios.post(URL_REGISTRO, user)
             .then(res => history.push('/login'))
             .catch(err => {
                 dispatch({
@@ -15,7 +18,7 @@ export const registerUser = (user, history) => dispatch => {
 }
 
 export const loginUser = (user) => dispatch => {
-    axios.post('http://localhost:4000/api/v1/sign_in', user)
+    axios.post(URL_LOGIN, user)
             .then(res => {
                 const token = res.data.jwt;
                 localStorage.setItem('jwt', token);
