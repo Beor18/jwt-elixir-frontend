@@ -8,7 +8,7 @@ const URL_LOGIN = 'http://localhost:4000/api/v1/sign_in';
 
 export const registerUser = (user, history) => dispatch => {
     axios.post(URL_REGISTRO, user)
-            .then(res => history.push('/login'))
+            .then(res => user)
             .catch(err => {
                 dispatch({
                     type: GET_ERRORS,
@@ -45,5 +45,4 @@ export const logoutUser = (history) => dispatch => {
     localStorage.removeItem('jwt');
     setAuthToken(false);
     dispatch(setCurrentUser({}));
-    history.push('/login');
 }
