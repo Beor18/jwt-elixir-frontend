@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { GET_ERRORS, SET_CURRENT_USER } from './types';
+import { GET_ERRORS, SET_CURRENT_USER, CARGAR_USUARIO } from './types';
 import setAuthToken from '../setAuthToken';
 import jwt_decode from 'jwt-decode';
 
 const URL_REGISTRO = 'http://localhost:4000/api/v1/sign_up';
 const URL_LOGIN = 'http://localhost:4000/api/v1/sign_in';
+const URL_USER = 'http://localhost:4000/api/v1/my_user';
 
 export const registerUser = (user, history) => dispatch => {
     axios.post(URL_REGISTRO, user)
@@ -32,6 +33,25 @@ export const loginUser = (user) => dispatch => {
                     payload: err.response.data
                 });
             });
+}
+
+export function cargarUsuario() {
+    return dispatch => {
+        axios({
+            method: 'GET',
+            url: URL_USER,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' +  localStorage.getItem('jwt')
+            },
+        })
+        .then(response => dispatch({
+            type: CARGAR_USUARIO, 
+            payload: response.data
+        })
+        ).catch(error => console.error(error.response));
+    }
 }
 
 export const setCurrentUser = decoded => {
