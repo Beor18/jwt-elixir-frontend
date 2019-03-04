@@ -10,12 +10,6 @@ class Perfil extends React.Component {
     this.props.cargarUsuario()
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps !== this.props) {
-      return this.props.cargarUsuario()
-    }
-  }
-
   render() {
     const {isAuthenticated} = this.props.auth;
     const authLinks = (
