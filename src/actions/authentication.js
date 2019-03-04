@@ -3,13 +3,10 @@ import { GET_ERRORS, SET_CURRENT_USER, CARGAR_USUARIO, CARGAR_HOTELES } from './
 import setAuthToken from '../setAuthToken';
 import jwt_decode from 'jwt-decode';
 
-const URL_REGISTRO = 'http://localhost:4000/api/v1/sign_up';
-const URL_LOGIN = 'http://localhost:4000/api/v1/sign_in';
-const URL_USER = 'http://localhost:4000/api/v1/my_user';
 const URL_BASE = 'http://localhost:4000/api/v1/';
 
 export const registerUser = (user, history) => dispatch => {
-    axios.post(URL_REGISTRO, user)
+    axios.post(URL_BASE + 'sign_up', user)
             .then(res => user)
             .catch(err => {
                 dispatch({
@@ -20,7 +17,7 @@ export const registerUser = (user, history) => dispatch => {
 }
 
 export const loginUser = (user) => dispatch => {
-    axios.post(URL_LOGIN, user)
+    axios.post(URL_BASE + 'sign_in', user)
             .then(res => {
                 const token = res.data.jwt;
                 localStorage.setItem('jwt', token);
@@ -40,7 +37,7 @@ export function cargarUsuario() {
     return dispatch => {
         axios({
             method: 'GET',
-            url: URL_USER,
+            url: URL_BASE + 'my_user',
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
@@ -68,7 +65,7 @@ export function cargarHoteles() {
         })
         .then(response => dispatch({
             type: CARGAR_HOTELES,
-            payload: response.data
+            payload: response.data.data
         })
         ).catch(error => console.error(error.response));
     }
