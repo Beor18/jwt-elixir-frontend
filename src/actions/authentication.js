@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { GET_ERRORS, SET_CURRENT_USER, CARGAR_USUARIO } from './types';
+import { GET_ERRORS, SET_CURRENT_USER, CARGAR_USUARIO, CARGAR_HOTELES } from './types';
 import setAuthToken from '../setAuthToken';
 import jwt_decode from 'jwt-decode';
 
 const URL_REGISTRO = 'http://localhost:4000/api/v1/sign_up';
 const URL_LOGIN = 'http://localhost:4000/api/v1/sign_in';
 const URL_USER = 'http://localhost:4000/api/v1/my_user';
+const URL_BASE = 'http://localhost:4000/api/v1/';
 
 export const registerUser = (user, history) => dispatch => {
     axios.post(URL_REGISTRO, user)
@@ -48,6 +49,25 @@ export function cargarUsuario() {
         })
         .then(response => dispatch({
             type: CARGAR_USUARIO, 
+            payload: response.data
+        })
+        ).catch(error => console.error(error.response));
+    }
+}
+
+export function cargarHoteles() {
+    return dispatch => {
+        axios({
+            method: 'GET',
+            url: URL_BASE + 'hoteles',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' +  localStorage.getItem('jwt')
+            },
+        })
+        .then(response => dispatch({
+            type: CARGAR_HOTELES,
             payload: response.data
         })
         ).catch(error => console.error(error.response));
