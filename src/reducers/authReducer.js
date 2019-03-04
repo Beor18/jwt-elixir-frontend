@@ -1,10 +1,11 @@
-import { SET_CURRENT_USER, CARGAR_USUARIO } from '../actions/types';
+import { SET_CURRENT_USER, CARGAR_USUARIO, CARGAR_HOTELES } from '../actions/types';
 import isEmpty from '../validation/is-empty';
 
 const initialState = {
     isAuthenticated: false,
     user: {},
-    users: {}
+    users: {},
+    hotel: {}
 }
 
 export default function(state = initialState, action ) {
@@ -23,6 +24,17 @@ export default function(state = initialState, action ) {
                     state, {
                         isAuthenticated: !isEmpty(action.payload),
                         users: action.payload
+                    }
+                )
+            }
+        case CARGAR_HOTELES:
+        console.log(action)
+            return {
+                ...state =
+                Object.assign({}, 
+                    state, {
+                        isAuthenticated: !isEmpty(action.payload),
+                        hotel: action.payload
                     }
                 )
             }
