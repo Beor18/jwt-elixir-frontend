@@ -11,12 +11,13 @@ class ListaHoteles extends Component {
     }
 
     render() {
+        const hotel = this.props.hotel
         return(
-            Object.keys(this.props.hotel).map(key => ( 
+            Object.keys(hotel).map(key => ( 
                 <div key={key} className="card col-3" style={{ float: 'left', marginRight: '0px', marginTop: '15px'}}>
                     <div className="card-body">
-                    <h5 className="card-title">{this.props.hotel[key].name}</h5>
-                    <p className="card-text">$ {this.props.hotel[key].price} </p>
+                    <h5 className="card-title">{hotel[key].name}</h5>
+                    <p className="card-text">$ {hotel[key].price} </p>
                     </div>
                 </div>
             ))
@@ -25,10 +26,11 @@ class ListaHoteles extends Component {
 }
 
 ListaHoteles.propTypes = {
-    hotel: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state, props) => ({
+    auth: state.auth,
     hotel: state.auth.hotel
 })
 
