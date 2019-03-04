@@ -28,7 +28,7 @@ export default function(state = initialState, action ) {
                 )
             }
         case CARGAR_HOTELES:
-        console.log(action)
+        console.log(action.payload)
             return {
                 ...state =
                 Object.assign({}, 
