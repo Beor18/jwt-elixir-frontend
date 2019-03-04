@@ -13,7 +13,10 @@ class Perfil extends React.Component {
   render() {
     const {isAuthenticated} = this.props.auth;
     const authLinks = (
-      <div>Email del Usuario: <h3>{this.props.users.email}</h3></div>
+      <div>
+        <h2>Perfil</h2>
+        <p>Email del Usuario: <h4>{this.props.users.email}</h4></p>
+      </div>
     )
     const guestLinks = (
       <h2>Bienvenido a Perfil componente usted no esta logeado</h2>
