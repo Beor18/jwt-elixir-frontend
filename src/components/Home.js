@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { loginUser } from '../actions/authentication';
 import { withRouter } from 'react-router-dom';
 import ListaHoteles from '../components/ListaHoteles';
+import FormularioHotel from '../components/FormularioHotel';
 
 class Home extends Component {
 
@@ -11,6 +12,7 @@ class Home extends Component {
         const {isAuthenticated} = this.props.auth;
         const authLinks = (
             <div className="col-12">
+                <FormularioHotel />
                 <ListaHoteles />
             </div>
         )
