@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ERRORS, SET_CURRENT_USER, CARGAR_USUARIO, CARGAR_HOTELES } from './types';
+import { GET_ERRORS, SET_CURRENT_USER, CARGAR_USUARIO, CARGAR_HOTELES, AGREGAR_HOTEL } from './types';
 import setAuthToken from '../setAuthToken';
 import jwt_decode from 'jwt-decode';
 
@@ -31,6 +31,31 @@ export const loginUser = (user) => dispatch => {
                     payload: err.response.data
                 });
             });
+}
+
+export function formularioHotel(name, price) {
+    return dispatch => {
+        axios({
+            method: 'POST',
+            url: URL_BASE + 'hoteles',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Accepts': 'application/json',
+                'Authorization': 'Bearer ' +  localStorage.getItem('jwt')
+            },
+            data: {
+                name,
+                price
+            }
+        })
+        .then(response => {
+            dispatch({
+                type: AGREGAR_HOTEL,
+                payload: response.data
+            })
+        }).catch(error => console.error(error.response));
+    }
 }
 
 export function cargarUsuario() {
