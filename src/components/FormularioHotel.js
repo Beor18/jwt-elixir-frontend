@@ -7,8 +7,8 @@ import classnames from 'classnames';
 
 class FormularioHotel extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             name: '',
             price: '',
@@ -27,7 +27,7 @@ class FormularioHotel extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const hotel = {
-            data: {
+            hotel: {
                 name: this.state.name,
                 price: this.state.price
              }
