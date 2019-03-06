@@ -33,7 +33,7 @@ export const loginUser = (user) => dispatch => {
             });
 }
 
-export function formularioHotel(name, price) {
+export function formularioHotel(data) {
     return dispatch => {
         axios({
             method: 'POST',
@@ -44,10 +44,7 @@ export function formularioHotel(name, price) {
                 'Accepts': 'application/json',
                 'Authorization': 'Bearer ' +  localStorage.getItem('jwt')
             },
-            data: {
-                name,
-                price
-            }
+            data: data
         })
         .then(response => {
             dispatch({
