@@ -6,7 +6,7 @@ const initialState = {
     user: {},
     users: {},
     hotel: {},
-    hoteles: {}
+    hoteles: []
 }
 
 export default function(state = initialState, action ) {
