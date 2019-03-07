@@ -12,7 +12,10 @@ class FormularioHotel extends Component {
         this.state = {
             name: '',
             price: '',
-            errors: {}
+            errors: {
+                name: 'Error ingrese un nombre!',
+                price: 'Error ingrese un precio!'
+            }
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
