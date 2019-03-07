@@ -5,6 +5,12 @@ import jwt_decode from 'jwt-decode';
 
 const URL_BASE = 'http://localhost:4000/api/v1/';
 
+const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' +  localStorage.getItem('jwt')
+}
+
 export const registerUser = (user, history) => dispatch => {
     axios.post(URL_BASE + 'sign_up', user)
             .then(res => user)
@@ -38,12 +44,7 @@ export function formularioHotel(data) {
         axios({
             method: 'POST',
             url: URL_BASE + 'hoteles',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
-                'Accepts': 'application/json',
-                'Authorization': 'Bearer ' +  localStorage.getItem('jwt')
-            },
+            headers: headers,
             data: data
         })
         .then(response => {
@@ -60,11 +61,7 @@ export function cargarUsuario() {
         axios({
             method: 'GET',
             url: URL_BASE + 'my_user',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' +  localStorage.getItem('jwt')
-            },
+            headers: headers,
         })
         .then(response => dispatch({
             type: CARGAR_USUARIO, 
@@ -79,11 +76,7 @@ export function cargarHoteles() {
         axios({
             method: 'GET',
             url: URL_BASE + 'hoteles',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' +  localStorage.getItem('jwt')
-            },
+            headers: headers,
         })
         .then(response => dispatch({
             type: CARGAR_HOTELES,
