@@ -10,17 +10,27 @@ class ListaHoteles extends Component {
         this.props.cargarHoteles()
     }
 
-    render() {
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps !== this.props) {
+          return this.listarHoteles()
+        }
+    }
+
+    listarHoteles() {
         const hotel = this.props.hotel
-        return(
-            Object.keys(hotel).map(key => ( 
-                <div key={key} className="card col-3" style={{ float: 'left', marginRight: '0px', marginTop: '15px'}}>
-                    <div className="card-body">
-                    <h5 className="card-title">{hotel[key].name}</h5>
-                    <p className="card-text">$ {hotel[key].price} </p>
-                    </div>
+        return Object.keys(hotel).map(key => ( 
+            <div key={key} className="card col-3" style={{ float: 'left', marginRight: '0px', marginTop: '15px'}}>
+                <div className="card-body">
+                <h5 className="card-title">{hotel[key].name}</h5>
+                <p className="card-text">$ {hotel[key].price} </p>
                 </div>
-            ))
+            </div>
+        ))
+    }
+
+    render() {
+        return(
+            <div>{this.listarHoteles()}</div>
         )
     }
 }

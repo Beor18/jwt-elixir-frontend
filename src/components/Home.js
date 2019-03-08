@@ -11,9 +11,19 @@ class Home extends Component {
     render() {
         const {isAuthenticated} = this.props.auth;
         const authLinks = (
-            <div className="col-12">
-                <FormularioHotel />
-                <ListaHoteles />
+            <div className="row">
+                <div className="col-4">
+                    
+                </div>
+                <div className="col-4">
+                    <FormularioHotel />
+                </div>
+                <div className="col-4">
+                    
+                </div>
+                <div className="col-12">
+                    <ListaHoteles />
+                </div>
             </div>
         )
       const guestLinks = (
