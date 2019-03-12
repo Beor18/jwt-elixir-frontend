@@ -5,8 +5,7 @@ const initialState = {
     isAuthenticated: false,
     user: {},
     users: {},
-    hotel: {},
-    hoteles: []
+    hotels: []
 }
 
 export default function(state = initialState, action ) {
@@ -35,20 +34,20 @@ export default function(state = initialState, action ) {
                 Object.assign({}, 
                     state, {
                         isAuthenticated: !isEmpty(action.payload),
-                        hotel: action.payload
+                        hotels: action.payload
                     }
                 )
             }
         case AGREGAR_HOTEL:
         console.log(action.payload)
         let nuevoHotel = action.payload
-        let oldState = state.hoteles.slice(0)
+        let oldState = state.hotels.slice(0)
             return { 
                 ...state = 
                 Object.assign({},
                     state, {
                         isAuthenticated: !isEmpty(action.payload),
-                        hoteles: [...oldState, nuevoHotel]
+                        hotels: [...oldState, nuevoHotel]
                     }
                 )
             }
