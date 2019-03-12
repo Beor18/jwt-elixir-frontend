@@ -17,9 +17,9 @@ class ListaHoteles extends Component {
     }
 
     listarHoteles() {
-        const hotel = this.props.hotel
+        const hotel = this.props.hotels
         return Object.keys(hotel).map(key => ( 
-            <div key={key} className="card col-3" style={{ float: 'left', marginRight: '0px', marginTop: '15px'}}>
+            <div key={key} className="card col-lg-4 col-md-4 col-sm-4 col-xs-12 mx-1" style={{ float: 'left', marginTop: '15px', maxWidth: '425px'}}>
                 <div className="card-body">
                 <h5 className="card-title">{hotel[key].name}</h5>
                 <p className="card-text">$ {hotel[key].price} </p>
@@ -30,7 +30,7 @@ class ListaHoteles extends Component {
 
     render() {
         return(
-            <div>{this.listarHoteles()}</div>
+            <div className="row mx-auto">{this.listarHoteles()}</div>
         )
     }
 }
@@ -41,7 +41,7 @@ ListaHoteles.propTypes = {
 
 const mapStateToProps = (state, props) => ({
     auth: state.auth,
-    hotel: state.auth.hotel
+    hotels: state.auth.hotels
 })
 
 export default connect(mapStateToProps, { cargarHoteles })(withRouter(ListaHoteles));

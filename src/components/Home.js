@@ -11,17 +11,12 @@ class Home extends Component {
     render() {
         const {isAuthenticated} = this.props.auth;
         const authLinks = (
-            <div className="row">
-                <div className="col-4">
-                    
-                </div>
-                <div className="col-4">
+            <div className="col-12">
+                <div className="col-4 mx-auto clearfix">
                     <FormularioHotel />
                 </div>
-                <div className="col-4">
-                    
-                </div>
-                <div className="col-12">
+                
+                <div className="px-0">
                     <ListaHoteles />
                 </div>
             </div>
@@ -30,7 +25,7 @@ class Home extends Component {
         <h2>Bienvenido a Home componente usted no esta logeado</h2>
       )
         return(
-            <div className="container-fluid" style={{ marginTop: '20px', marginBottom: '20px'}}>
+            <div className="col-12" style={{ marginTop: '20px', marginBottom: '20px'}}>
                {isAuthenticated ? authLinks : guestLinks}
             </div>
             

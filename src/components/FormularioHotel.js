@@ -39,7 +39,7 @@ class FormularioHotel extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.hoteles) {
+        if(nextProps.hotels) {
             this.props.history.push('/')
         }
         if(nextProps.errors) {
@@ -50,7 +50,7 @@ class FormularioHotel extends Component {
     }
 
     componentDidMount() {
-        if(this.props.hoteles) {
+        if(this.props.hotels) {
             this.props.history.push('/');
         }
     }
@@ -106,7 +106,7 @@ FormularioHotel.propTypes = {
 
 const mapStateToProps = (state, props) => ({
     auth: state.auth,
-    hoteles: state.auth.hoteles,
+    hotels: state.auth.hotels,
     errors: state.errors
 });
 
