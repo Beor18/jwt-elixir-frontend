@@ -50,7 +50,7 @@ export function formularioHotel(data) {
         .then(response => {
             dispatch({
                 type: AGREGAR_HOTEL,
-                payload: response.data
+                payload: response.data.data
             })
         }).catch(error => console.error(error.response));
     }
