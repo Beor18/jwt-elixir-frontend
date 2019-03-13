@@ -52,7 +52,13 @@ export function formularioHotel(data) {
                 type: AGREGAR_HOTEL,
                 payload: response.data.data
             })
-        }).catch(error => console.error(error.response));
+        })
+        .catch(err => {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data.errors
+            });
+        });
     }
 }
 
