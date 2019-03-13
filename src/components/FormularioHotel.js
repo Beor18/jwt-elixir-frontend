@@ -12,10 +12,7 @@ class FormularioHotel extends Component {
         this.state = {
             name: '',
             price: '',
-            errors: {
-                name: 'Error ingrese un nombre!',
-                price: 'Error ingrese un precio!'
-            }
+            errors: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,6 +43,7 @@ class FormularioHotel extends Component {
             this.setState({
                 errors: nextProps.errors
             });
+            this.props.history.push('/')
         }
     }
 
@@ -56,7 +54,7 @@ class FormularioHotel extends Component {
     }
 
     render() {
-        const { errors } = this.state;
+        const {errors}  = this.props;
         return(
         <div className="container" style={{ marginTop: '20px'}}>
             <h2 style={{marginBottom: '40px'}}>Cargar Datos</h2>

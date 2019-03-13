@@ -54,6 +54,7 @@ class Login extends Component {
         return(
         <div className="container" style={{ marginTop: '50px', width: '700px'}}>
             <h2 style={{marginBottom: '40px'}}>Panel de Administración</h2>
+            <p>{errors.error}</p>
             <form onSubmit={ this.handleSubmit }>
                 <div className="form-group">
                     <input
